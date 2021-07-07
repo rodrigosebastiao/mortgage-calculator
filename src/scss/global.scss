@@ -1,5 +1,16 @@
+body {
+    font-family: $font-main;
+    scroll-behavior: smooth;
+}
+
 input {
     &[type="text"] {
         
     }
 }
+
+label {
+    font-size: $fz;
+    font-weight: 400;
+}
+

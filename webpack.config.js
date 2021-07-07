@@ -3,12 +3,13 @@
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const FontminPlugin  = require("fontmin-webpack");
 
 const isProduction = process.env.NODE_ENV == "production";
 
 const config = {
     entry: {
-        mortigage: ['./src/js/mortgage.js', './src/scss/mortgage.scss'],
+        mortgage: ['./src/js/mortgage.js', './src/scss/mortgage.scss'],
       },
       output: {
         filename: './js/[name].js',
@@ -30,6 +31,10 @@ const config = {
     new MiniCssExtractPlugin({
         filename: './css/[name].css',
     }),
+    new FontminPlugin({
+      autodetect: true, // automatically pull unicode characters from CSS
+      glyphs: ['\uf0c8' /* extra glyphs to include */],
+    }),
   ],
   module: {
     rules: [
@@ -40,10 +45,10 @@ const config = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-            "postcss-loader", 
-            MiniCssExtractPlugin.loader,
-            "css-loader", 
-            "sass-loader"
+          MiniCssExtractPlugin.loader,
+          "css-loader", 
+          "sass-loader",
+          "postcss-loader", 
         ],
       },
       {

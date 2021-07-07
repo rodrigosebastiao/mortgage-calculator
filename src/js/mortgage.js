@@ -83,8 +83,9 @@ class MortgageCalculator {
     }
 }
 
+const calculator = new MortgageCalculator();
+
 function calcuLatorView() {
-    const calculator = new MortgageCalculator();
 
     const updateDOMView = (input, status, objProperty) => {
         const inputElement = document.querySelector(input);
@@ -97,14 +98,15 @@ function calcuLatorView() {
                 statusField.value = calculator[objProperty];
             }
 
-            // ON/OFF Real time update
-            updateResults();
+           /* ON/OFF Real time feature */
+            updateResults(); 
         }
 
 
         updateValue(Number(inputElement.value));
 
 
+        /* ON/OFF Real time feature */
         inputElement.addEventListener("change", (event)=>{
             const newValue = Number(event.target.value);
             updateValue(newValue);
@@ -117,11 +119,12 @@ function calcuLatorView() {
     }
 
 
+    /*pass elements and object setters/getters as string to keep reference*/
     updateDOMView("#years-of-mortgage", "#years-of-mortgage-status", "yearsOfMortGage");
     updateDOMView("#interest-rate", "#interest-rate-status", "interestRate");
     updateDOMView("#loan-amount", "", "loanAmount");
-    updateDOMView("#anual-tax", "", "anualTax");
-    updateDOMView("#anual-insurance", "", "anualInsurance");
+    updateDOMView("#annual-tax", "", "anualTax");
+    updateDOMView("#annual-insurance", "", "anualInsurance");
 
 
     function updateResults(){
@@ -130,8 +133,7 @@ function calcuLatorView() {
         const labelInsurance = document.querySelector("#result-insurance");
         const labelMonthlyPayment = document.querySelector("#result-monthly-payment");
 
-        // labelPrincipal.innerText = calculator.resultPrincipalInterest;
-        /*  */
+
         labelPrincipal.innerText = localCurrency(calculator.resultPrincipalInterest);
         labelTax.innerText = localCurrency(calculator.resultTax);
         labelInsurance.innerText = localCurrency(calculator.resultInsurance);
@@ -140,7 +142,7 @@ function calcuLatorView() {
 
     document.querySelector("#calculator-form").addEventListener("click", (event)=>{
         event.preventDefault();
-        /* Update on submit */
+        /* Update on submit if Real time is off*/
         updateResults();
     });
 

@@ -1,0 +1,21 @@
+
+.header {
+    height: 64px;
+    margin-bottom: 48px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.09);
+    &-wrapper {
+        @include wrapper;
+        height: 100%;
+    }
+
+    h1 {
+        font-size: $fz4;
+        font-weight: 400;
+        font-family: $font-publico;
+        letter-spacing: -1.3px;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        line-height: 1.8;
+    }
+}

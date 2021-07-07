@@ -8,135 +8,145 @@
 </head>
 <body>
     <main>
-        <header>
-            <h1>Mortgage Calculator</h1>
+        <header class="header">
+            <div class="header-wrapper">
+                <h1>Mortgage Calculator</h1>
+            </div>
         </header>
 
         <section class="calculator">
-            <div class="calculator__wrapper">
-               <div class="calculator__header"> 
-                   <h2>Change values to calculate your results</h2>
-                </div>
+            <div class="calculator-wrapper">
+                <!-- <div class="calculator__header">
+                 </div> -->
+                
                <div class="calculator__body"> 
-                   <form id="calculator-form" className="calculator__form">
+                   <div class="calculator__body-wrapper">
+                        <p class="lined-down">Change values to calculate your results</p>
 
-                       <li class="calculator__item calculator__years-of-mortgage">
-                           <label for="years-of-mortgage" id="label-years">Years of mortgage</label>
-                           <div class="calculator__group">
-                               <span class="years years__min" id="years-min">1</span>
-                               <input type="range" 
-                                    name="years-of-mortgage" 
-                                    id="years-of-mortgage"
-                                    min="1" 
-                                    max="40"
-                                    step="1"
-                                    aria-live="polite" 
-                                    role="status"
-                                    aria-labelledby="Years of Mortgage"
-                                >
-                               <span class="years years__max" id="years-of-mortgage-min">40</span>
-                               <input type="number" name="years-of-mortgage-status" id="years-of-mortgage-status">
-                            </div>
-                       </li>
+                       <form class="calculator__form" id="calculator-form">
+                        <ul class="calculator__form-list">
+                            <li class="calculator__item calculator__years-of-mortgage">
+                                <label for="years-of-mortgage" id="label-years-of-mortgage">Years of mortgage</label>
+                                <div class="calculator__group">
+                                    <div class="calculator__row">
+                                        <span class="years years__min boundaries bold-label" id="years-min">1</span>
+                                        <input type="range" 
+                                             name="years-of-mortgage" 
+                                             id="years-of-mortgage"
+                                             min="1" 
+                                             max="40"
+                                             step="1"
+                                             aria-live="polite" 
+                                             role="status"
+                                             aria-labelledby="label-years-of-mortgage"
+                                         >
+                                        <span class="years years__max boundaries bold-label" id="years-max">40</span>
+                                    </div>
+                                    <input type="text" class="numerators" name="years-of-mortgage-status" id="years-of-mortgage-status" disable>
+                                 </div>
+                            </li>
+     
+                            <li class="calculator__item calculator__interest-rate">
+                                <label for="interest-rate" id="label-interest-rate">Rate of Interest (%)</label>
+                                <div class="calculator__group">
+                                     <div class="calculator__row">
+                                         <span class="interest interest__min boundaries bold-label" id="interest-min">0.1</span>
+                                         <input type="range" 
+                                                 name="interest-rate"
+                                                 id="interest-rate" 
+                                                 min="0.1" 
+                                                 max="8.0"
+                                                 step="0.1"
+                                                 aria-live="polite" 
+                                                 role="status"
+                                                 aria-labelledby="label-interest-rate"
+                                             >
+                                         <span class="interest interest__max boundaries bold-label" id="interest-max">8.0</span>
+                                     </div>
+                                    <input type="text" class="numerators" step="0.1" name="interest-rate-status" id="interest-rate-status" disable>
+                                 </div>
+                            </li>
+     
+                            <li class="calculator__item calculator__loan-amount">
+                                 <label for="loan-amount" id="label-loan-amount">Loan Amount</label>
+                                 <div class="calculator__group">
+                                     <span class="currency" data-currency="$"></span>
+                                     <input 
+                                         type="text" 
+                                         name="loan-amount" 
+                                         id="loan-amount" 
+                                         aria-live="polite"
+                                         placeholder="$1000000"
+                                         value="1000000"
+                                         role="status"
+                                         aria-labelledby="label-loan-amount"
+                                     >
+                                 </div>
+                             </li>
+     
+                            <li class="calculator__item calculator__annual-tax half">
+                                 <label for="annual-tax" id="label-annual-tax">Annual Tax</label>
+                                 <div class="calculator__group">
+                                     <span class="currency" data-currency="$"></span>
+                                     <input 
+                                         type="text" 
+                                         name="annual-tax" 
+                                         id="annual-tax" 
+                                         aria-live="polite"
+                                         placeholder="$1000"
+                                         value="1000"
+                                         role="status"
+                                         aria-labelledby="label-annual-tax"
+                                     >
+                                 </div>
+                             </li>
+     
+                            <li class="calculator__item calculator__annual-insurance half">
+                                 <label for="annual-insurance" id="label-annual-insurance">annual Insurance</label>
+                                 <div class="calculator__group">
+                                     <span class="currency" data-currency="$"></span>
+                                     <input 
+                                         type="text" 
+                                         name="annual-insurance" 
+                                         id="annual-insurance" 
+                                         aria-live="polite"
+                                         placeholder="$300"
+                                         value="300"
+                                         role="status"
+                                         aria-labelledby="label-annual-insurance"
+                                     >
+                                 </div>
+                             </li>
+     
+                            <li class="calculator__item calculator__submit">
+                                <button disabled class="submit-values" type="submit" name="submit-values" id="submit-values" >Calculate</button>
+                             </li>
+                        </ul>
+                       </form>
+                   </div>
 
-                       <li class="calculator__item calculator__interest-rate">
-                           <label for="interest-rate" id="label-years">Rate of Interest (%)</label>
-                           <div class="calculator__group">
-                               <span class="years years__min" id="years-min">0.1</span>
-                               <input type="range" 
-                                    name="interest-rate"
-                                    id="interest-rate" 
-                                    min="0.1" 
-                                    max="8.0"
-                                    step="0.1"
-                                    aria-live="polite" 
-                                    role="status"
-                                    aria-labelledby="Rate of Intereset (%)"
-                                >
-                               <span class="years years__max" id="interest-rate-min">8.0</span>
-                               <input type="number" step="0.1" name="interest-rate-status" id="interest-rate-status">
-                            </div>
-                       </li>
-
-                       <li class="calculator__item calculator__loan-amount">
-                            <label for="loan-amount" id="label-years">Loan Amount</label>
-                            <div class="calculator__group">
-                                <span class="currency" date-currency="$"></span>
-                                <input 
-                                    type="text" 
-                                    name="loan-amount" 
-                                    id="loan-amount" 
-                                    aria-live="polite"
-                                    placeholder="$1000000"
-                                    value="1000000"
-                                    role="status"
-                                    aria-labelledby="Loan Amount"
-                                >
-                            </div>
-                        </li>
-
-                       <li class="calculator__item calculator__anual-tax">
-                            <label for="anual-tax" id="label-years">Anual Tax</label>
-                            <div class="calculator__group">
-                                <span class="currency" date-currency="$"></span>
-                                <input 
-                                    type="text" 
-                                    name="anual-tax" 
-                                    id="anual-tax" 
-                                    aria-live="polite"
-                                    placeholder="$1000"
-                                    value="1000"
-                                    role="status"
-                                    aria-labelledby="Loan Amount"
-                                >
-                            </div>
-                        </li>
-
-                       <li class="calculator__item calculator__anual-insurance">
-                            <label for="anual-insurance" id="label-years">Anual Insurance</label>
-                            <div class="calculator__group">
-                                <span class="currency" date-currency="$"></span>
-                                <input 
-                                    type="text" 
-                                    name="anual-insurance" 
-                                    id="anual-insurance" 
-                                    aria-live="polite"
-                                    placeholder="$300"
-                                    value="300"
-                                    role="status"
-                                    aria-labelledby="Loan Amount"
-                                >
-                            </div>
-                        </li>
-
-                       <li class="calculator__item calculator__submit-values">
-                           <button disabled type="submit" name="submit-values" id="submit-values" >Calculate</button>
-                        </li>
-                   </form>
-
-                   <aside class="mortigage-results">
+                   <div class="mortgage-results">
                        <h2>Your results</h2>
 
                        <ul>
-                           <li class="mortigage-results__item">
-                               <span id="label-principal-interest" class="mortigage-results__title">Principal & Intereset</span>
-                               <p id="result-principal-interest" class="mortigage-results__value" aria-labelledby="label-principal-interest" aria-live="polite"></p>
+                           <li class="mortgage-results__item">
+                               <span id="label-principal-interest" class="mortgage-results__title">Principal & Intereset</span>
+                               <p id="result-principal-interest" class="mortgage-results__value" aria-labelledby="label-principal-interest" aria-live="polite"><span class="initial-values">$--</span></p>
                            </li>
-                           <li class="mortigage-results__item">
-                               <span id="label-tax" class="mortigage-results__title">Tax</span>
-                               <p id="result-tax" class="mortigage-results__value" aria-labelledby="label-tax" aria-live="polite"></p>
+                           <li class="mortgage-results__item">
+                               <span id="label-tax" class="mortgage-results__title">Tax</span>
+                               <p id="result-tax" class="mortgage-results__value" aria-labelledby="label-tax" aria-live="polite"><span class="initial-values">$--</span></p>
                            </li>
-                           <li class="mortigage-results__item">
-                               <span id="label-insurance" class="mortigage-results__title">Insurance</span>
-                               <p id="result-insurance" class="mortigage-results__value" aria-labelledby="label-insurance" aria-live="polite"></p>
+                           <li class="mortgage-results__item">
+                               <span id="label-insurance" class="mortgage-results__title">Insurance</span>
+                               <p id="result-insurance" class="mortgage-results__value" aria-labelledby="label-insurance" aria-live="polite"><span class="initial-values">$--</span></p>
                            </li>
-                           <li class="mortigage-results__item">
-                               <span id="label-monthly-payment" class="mortigage-results__title">Total Monthy Payment</span>
-                               <p id="result-monthly-payment" class="mortigage-results__value" aria-labelledby="label-monthly-payment" aria-live="polite"></p>
+                           <li class="mortgage-results__item">
+                               <span id="label-monthly-payment" class="mortgage-results__title">Total Monthy Payment</span>
+                               <p id="result-monthly-payment" class="mortgage-results__value" aria-labelledby="label-monthly-payment" aria-live="polite"><span class="initial-values">$--</span></p>
                            </li>
                        </ul>
-
-                   </aside>
+                   </div>
                 </div>
             </div>
         </section>

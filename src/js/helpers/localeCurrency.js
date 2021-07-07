@@ -3,6 +3,7 @@ const removeSign = (num) => {
 }
 
 export const localCurrency = (num) =>{
-    num.toLocaleString("de-US", { style: "currency", currency: "USD" });
-    return num.toLocaleString("de-US", { style: "currency", currency: "USD" });
+    const prefix = "$";
+    const value = num.toFixed(2).toLocaleString('en-US', {minimumFractionDigits: 2})
+    return `${prefix} ${value}`;
 }
