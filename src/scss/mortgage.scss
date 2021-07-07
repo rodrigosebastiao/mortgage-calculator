@@ -1,0 +1,13 @@
+@import "./reset";
+@import "./variables";
+@import "./mixins";
+@import "./global";
+@import "./fonts";
+
+
+
+body {
+    // background-color: $color-main;
+    scroll-behavior: smooth;
+    font-family: "Public Banner";
+}
