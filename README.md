@@ -1,4 +1,4 @@
-# 🚀 Mortigage Calculator
+# 🚀 Mortgage Calculator
 
 This project has been created using **webpack-cli**, you can now run
 
