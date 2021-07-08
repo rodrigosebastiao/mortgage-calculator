@@ -35,6 +35,7 @@ const config = {
       autodetect: true, // automatically pull unicode characters from CSS
       glyphs: ['\uf0c8' /* extra glyphs to include */],
     }),
+    require('autoprefixer'),
   ],
   module: {
     rules: [
@@ -44,11 +45,28 @@ const config = {
       },
       {
         test: /\.s[ac]ss$/i,
+        // test: /\.css$/,
+        /* Order matters from bottom to top */
         use: [
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    "autoprefixer",
+                    {
+                      // Options
+                    },
+                  ],
+                ],
+              },
+            },
+          },
+
           MiniCssExtractPlugin.loader,
-          "css-loader", 
+          "css-loader",
           "sass-loader",
-          "postcss-loader", 
         ],
       },
       {
@@ -58,7 +76,7 @@ const config = {
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         loader: "url-loader",
-        options: { limit: 1000, name: "fonts/[name].[ext]", },
+        options: { limit: 1000, name: "fonts/[name].[ext]"},
       },
       
 

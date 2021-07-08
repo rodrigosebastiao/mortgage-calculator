@@ -42,7 +42,7 @@
                                          >
                                         <span class="years years__max boundaries bold-label" id="years-max">40</span>
                                     </div>
-                                    <input type="text" class="numerators" name="years-of-mortgage-status" id="years-of-mortgage-status" disable>
+                                    <input type="text" class="numerators" name="years-of-mortgage-status" id="years-of-mortgage-status" data-limit="[1, 40]">
                                  </div>
                             </li>
      
@@ -63,7 +63,7 @@
                                              >
                                          <span class="interest interest__max boundaries bold-label" id="interest-max">8.0</span>
                                      </div>
-                                    <input type="text" class="numerators" step="0.1" name="interest-rate-status" id="interest-rate-status" disable>
+                                    <input type="text" class="numerators" step="0.1" name="interest-rate-status" id="interest-rate-status" data-limit="[0.1, 8.0]">
                                  </div>
                             </li>
      
@@ -72,15 +72,17 @@
                                  <div class="calculator__group">
                                      <span class="currency" data-currency="$"></span>
                                      <input 
-                                         type="text" 
+                                         type="number" 
                                          name="loan-amount" 
                                          id="loan-amount" 
                                          aria-live="polite"
-                                         placeholder="$1000000"
+                                         placeholder="1000000"
                                          value="1000000"
                                          role="status"
                                          aria-labelledby="label-loan-amount"
+                                         required
                                      >
+                                     <span class="alert alert-mandatory alert--active">Mandatory field</span>
                                  </div>
                              </li>
      
@@ -89,37 +91,41 @@
                                  <div class="calculator__group">
                                      <span class="currency" data-currency="$"></span>
                                      <input 
-                                         type="text" 
+                                         type="number" 
                                          name="annual-tax" 
                                          id="annual-tax" 
                                          aria-live="polite"
-                                         placeholder="$1000"
+                                         placeholder="1000"
                                          value="1000"
                                          role="status"
                                          aria-labelledby="label-annual-tax"
+                                         required
                                      >
+                                     <span class="alert alert-mandatory alert--active">Mandatory field</span>
                                  </div>
                              </li>
      
                             <li class="calculator__item calculator__annual-insurance half">
-                                 <label for="annual-insurance" id="label-annual-insurance">annual Insurance</label>
+                                 <label for="annual-insurance" id="label-annual-insurance">Annual Insurance</label>
                                  <div class="calculator__group">
                                      <span class="currency" data-currency="$"></span>
                                      <input 
-                                         type="text" 
+                                         type="number" 
                                          name="annual-insurance" 
                                          id="annual-insurance" 
                                          aria-live="polite"
-                                         placeholder="$300"
+                                         placeholder="300"
                                          value="300"
                                          role="status"
                                          aria-labelledby="label-annual-insurance"
+                                         required
                                      >
+                                     <span class="alert alert-mandatory alert--active">Mandatory field</span>
                                  </div>
                              </li>
      
                             <li class="calculator__item calculator__submit">
-                                <button disabled class="submit-values" type="submit" name="submit-values" id="submit-values" >Calculate</button>
+                                <button class="submit-values" type="submit" name="submit-values" id="submit-values" >Calculate</button>
                              </li>
                         </ul>
                        </form>

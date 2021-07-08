@@ -4,22 +4,25 @@ import {localCurrency} from "./helpers/localeCurrency";
     Formulas
     Principle & Interest:
     ((interestRate / 100) / 12)* loanAmount / (1-Math.pow((1 + ((interestRate / 100)/12)), -yearsOfMortgage*12))
+
     Tax
     annualTax / 12
+
     Insurance
     annualInsurance / 12
+
     Monthly payment
     principleAndInterests + Tax + Insurance
 */
 
 
 class MortgageCalculator {
-    constructor(yearsOfMortGage, interestRate, loanAmount, anualTax, anualInsurance){
+    constructor(yearsOfMortGage, interestRate, loanAmount, annualTax, annualInsurance){
         this._yearsOfMortGage = yearsOfMortGage; /* @type {number} */
         this._interestRate = interestRate; /* @type {number} */
         this._loanAmount = loanAmount; /* @type {number} */
-        this._anualTax = anualTax; /* @type {number} */
-        this._anualInsurance = anualInsurance; /* @type {number} */
+        this._annualTax = annualTax; /* @type {number} */
+        this._annualInsurance = annualInsurance; /* @type {number} */
     }
     
     get yearsOfMortGage() {
@@ -30,13 +33,11 @@ class MortgageCalculator {
         this._yearsOfMortGage = value;
     }
 
-    get interestRate() {
-        
+    get interestRate() {        
         return this._interestRate;
     }
 
     set interestRate(value) {
-
         this._interestRate = value;
     }
 
@@ -48,38 +49,43 @@ class MortgageCalculator {
         this._loanAmount = value;
     }
 
-    get anualTax() {
-        return this._anualTax;
+    get annualTax() {
+        /* Tax: annualTax / 12 */
+        return this._annualTax;
     }
 
-    set anualTax(value) {
-        this._anualTax = value;
+    set annualTax(value) {
+        this._annualTax = value;
     }
 
-    get anualInsurance() {
-        return this._anualInsurance;
+    get annualInsurance() {
+        /* Insurance: annualInsurance / 12 */
+        return this._annualInsurance;
     }
 
-    set anualInsurance(value) {
-        this._anualInsurance = value;
+    set annualInsurance(value) {
+        this._annualInsurance = value;
     }
 
     get resultPrincipalInterest() {
-        // console.log("this._loanAmount", this._loanAmount);
+        /* Principle & Interest:
+    ((interestRate / 100) / 12)* loanAmount / (1-Math.pow((1 + ((interestRate / 100)/12)), -yearsOfMortgage*12)) */
         const principalInterest = (this._interestRate / 100 / 12) * this._loanAmount / (1 - Math.pow((1 + ((this._interestRate / 100)/12)), - this._yearsOfMortGage * 12));
         return this._resultPrincipalInterest = principalInterest;
     }
+    
 
     get resultTax() {
-        return this._anualTax / 12;
+        return this._annualTax / 12;
     }
 
     get resultInsurance() {
-        return this._anualInsurance / 12;
+        return this._annualInsurance / 12;
     }
 
     get resultMonthlyPayment() {
-        return this._resultPrincipalInterest / 12;
+        /* Monthly payment: principleAndInterests + Tax + Insurance */
+        return (this.resultPrincipalInterest + this.resultTax + this.resultInsurance);
     }
 }
 
@@ -92,29 +98,33 @@ function calcuLatorView() {
         const statusField = status ? document.querySelector(status) : "";
 
         function updateValue (value){
-            calculator[objProperty] = value;
+            calculator[objProperty] = value
             
             if(statusField){
                 statusField.value = calculator[objProperty];
+                inputElement.value =  calculator[objProperty];
             }
 
            /* ON/OFF Real time feature */
-            updateResults(); 
+            // updateResults(); 
         }
 
 
-        updateValue(Number(inputElement.value));
+        updateValue(inputElement.value);
 
 
-        /* ON/OFF Real time feature */
         inputElement.addEventListener("change", (event)=>{
-            const newValue = Number(event.target.value);
+            const newValue = event.target.value;
             updateValue(newValue);
         });
 
-        inputElement.addEventListener("keyup", (event)=>{
-            const newValue = Number(event.target.value);
-            updateValue(newValue);
+        [inputElement, statusField].forEach((field)=>{
+            if(field){
+                field.addEventListener("keyup", (event)=>{
+                    const newValue = event.target.value;
+                    updateValue(newValue);
+                });
+            }
         });
     }
 
@@ -123,31 +133,62 @@ function calcuLatorView() {
     updateDOMView("#years-of-mortgage", "#years-of-mortgage-status", "yearsOfMortGage");
     updateDOMView("#interest-rate", "#interest-rate-status", "interestRate");
     updateDOMView("#loan-amount", "", "loanAmount");
-    updateDOMView("#annual-tax", "", "anualTax");
-    updateDOMView("#annual-insurance", "", "anualInsurance");
+    updateDOMView("#annual-tax", "", "annualTax");
+    updateDOMView("#annual-insurance", "", "annualInsurance");
+    updateDOMView("#years-of-mortgage-status", "", "yearsOfMortGage");
+    // updateDOMView("#interest-rate-status", "", "interestRate");
 
 
-    function updateResults(){
+    function updateResults(event){
         const labelPrincipal = document.querySelector("#result-principal-interest");
         const labelTax = document.querySelector("#result-tax");
         const labelInsurance = document.querySelector("#result-insurance");
         const labelMonthlyPayment = document.querySelector("#result-monthly-payment");
-
+        const mortgageResults = document.querySelector(".mortgage-results");
 
         labelPrincipal.innerText = localCurrency(calculator.resultPrincipalInterest);
         labelTax.innerText = localCurrency(calculator.resultTax);
         labelInsurance.innerText = localCurrency(calculator.resultInsurance);
         labelMonthlyPayment.innerText = localCurrency(calculator.resultMonthlyPayment);
+
+        mortgageResults.classList.add("mortgage-results--display");
+        mortgageResults.scrollIntoView();
+        event.target.classList.add("calculator__form--calculated");
     }
 
-    document.querySelector("#calculator-form").addEventListener("click", (event)=>{
+    document.querySelector("#calculator-form").addEventListener("submit", (event)=>{
         event.preventDefault();
         /* Update on submit if Real time is off*/
-        updateResults();
+        updateDOMView("#years-of-mortgage", "#years-of-mortgage-status", "yearsOfMortGage");
+        updateDOMView("#interest-rate", "#interest-rate-status", "interestRate");
+        updateDOMView("#loan-amount", "", "loanAmount");
+        updateDOMView("#annual-tax", "", "annualTax");
+        updateDOMView("#annual-insurance", "", "annualInsurance");
+        updateResults(event);
     });
 
-}
+    /* Alerts */
 
+    const alerts = (event) => {
+        const alertField = event.target;
+
+        if(!alertField.value || Number(alertField.value) <= 0){
+            alertField.classList.add("warning");
+        } else {
+            alertField.classList.remove("warning");
+        }
+    }
+    const inputsRequired = document.querySelectorAll("input:required");
+
+    inputsRequired.forEach((input)=>{
+        input.addEventListener("change", (event)=>{
+            alerts(event);
+        });
+        input.addEventListener("keyup", (event)=>{
+            alerts(event);
+        });
+    });
+}
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
